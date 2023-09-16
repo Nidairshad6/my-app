@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  hello-world:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hello-world:latest
+    volumes:
+      - ./index.html:/app/index.html
