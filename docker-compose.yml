@@ -7,4 +7,4 @@ services:
       dockerfile: Dockerfile
     image: hello-world:latest
     volumes:
-      - ./index.html:/app/index.html
+      - ./index.html:/index.html
