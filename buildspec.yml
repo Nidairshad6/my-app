@@ -17,13 +17,12 @@ phases:
 
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker images...
-      - docker-compose -f docker-compose.yml push
-
-      # Add any additional deployment steps here
-      # For example, you could use Docker Compose to run your application
-      # on the EC2 instance directly or use a different deployment method.
+    - echo Build completed on `date`
+    - echo Pushing the Docker images...
+    - echo Logging in to Docker Hub...
+    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+    - docker-compose -f docker-compose.yml push
+    - docker logout
 
 artifacts:
   files:
