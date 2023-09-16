@@ -20,7 +20,7 @@ phases:
     - echo Build completed on `date`
     - echo Pushing the Docker images...
     - echo Logging in to Docker Hub...
-    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+    - echo "nida15623" | docker login -u "irshadnida69@gmail.com" --password-stdin
     - docker-compose -f docker-compose.yml push
     - docker logout
 
