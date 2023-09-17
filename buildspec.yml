@@ -8,7 +8,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region us -est-1)
+      - $(aws ecr get-login --no-include-email --region us-east-1)
 
 
 
@@ -20,7 +20,7 @@ phases:
   post_build:
     commands:
       - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
-      - docker push 875681151031.dkr.ecr.us--est-1.amazonaws.com/my-repo:latest
+      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
 
       # Stop and remove existing containers
       - docker-compose -f docker-compose.yml down
