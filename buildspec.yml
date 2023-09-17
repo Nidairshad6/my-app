@@ -1,9 +1,5 @@
 version: 0.2
 
-env:
-  variables:
-    REPO_URL_1: "public.ecr.aws/y1w7a2c8/my-repo"
-    REPO_URL_2: "875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo"
 phases:
   install:
     runtime-versions:
@@ -12,20 +8,19 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $REPO_URL_2
+      - $(aws ecr get-login --no-include-email --region us -est-1)
 
 
 
   build:
     commands:
       - echo Build started on `date`
-      - docker-compose -f docker-compose.yml build
+      - docker build -t my-repo .
 
   post_build:
     commands:
-      - echo Pushing Docker images to ECR...
-      - docker-compose -f docker-compose.yml push
-      - echo Deploying Docker Compose...
+      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
+      - docker push 875681151031.dkr.ecr.us--est-1.amazonaws.com/my-repo:latest
 
       # Stop and remove existing containers
       - docker-compose -f docker-compose.yml down
