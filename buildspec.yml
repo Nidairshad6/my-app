@@ -8,7 +8,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/y1w7a2c8/my-repo
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875681151031.dkr.ecr.us-east-1.amazonaws.com
 
   build:
     commands:
@@ -17,12 +17,18 @@ phases:
 
   post_build:
     commands:
-    - echo Build completed on `date`
-    - echo Pushing the Docker images...
-    - echo Logging in to Docker Hub...
-    - echo "nida15623" | docker login -u "irshadnida69@gmail.com" --password-stdin
-    - docker-compose -f docker-compose.yml push
-    - docker logout
+      - echo Pushing Docker images to ECR...
+      - docker-compose -f docker-compose.yml push
+      - echo Deploying Docker Compose...
+
+      # Stop and remove existing containers
+      - docker-compose -f docker-compose.yml down
+
+      # Pull the latest images from ECR
+      - docker-compose -f docker-compose.yml pull
+
+      # Start the updated containers
+      - docker-compose -f docker-compose.yml up -d
 
 artifacts:
   files:
