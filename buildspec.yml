@@ -9,6 +9,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875681151031.dkr.ecr.us-east-1.amazonaws.com
+      - public.ecr.aws/y1w7a2c8/my-repo=875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo
 
 
   build:
