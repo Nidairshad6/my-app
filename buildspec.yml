@@ -11,6 +11,8 @@ phases:
   build:
     commands:
       - echo Building Docker image...
+      - docker login -u nidairshad -p dckr_pat_3VN9xYfXWU3j-rLpP7MNHa0vY18
+
       - docker build -t my-repo:latest .
       - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
 
