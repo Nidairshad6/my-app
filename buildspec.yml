@@ -15,11 +15,13 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker build -t my-repo .
-
+      - echo Building the Docker image...          
+      - docker build -t my-repo:latest .
+      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest      
   post_build:
     commands:
-      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
       - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
 
       # Stop and remove existing containers
