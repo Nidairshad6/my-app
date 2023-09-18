@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin
 
 
 
@@ -12,25 +12,15 @@ phases:
     commands:
       - echo Building Docker image...
       - docker build -t my-repo:latest .
-      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo
-      - echo Pushing Docker image...
-      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo    
+      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
+
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
 
-      # Stop and remove existing containers
-      - docker-compose -f docker-compose.yml down
-
-      # Pull the latest images from ECR
-      - docker-compose -f docker-compose.yml pull
-
-      # Start the updated containers
-      - docker-compose -f docker-compose.yml up -d
 
 artifacts:
   files:
     - '**/*'
-
