@@ -1,10 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      docker: 23
-
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -14,10 +10,11 @@ phases:
 
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
+      - echo Building Docker image...
       - docker build -t my-repo:latest .
-      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest      
+      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo
+      - echo Pushing Docker image...
+      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo    
   post_build:
     commands:
       - echo Build completed on `date`
