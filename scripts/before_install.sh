@@ -2,5 +2,6 @@
 set -e
 
 # Stop any running containers
-cd /home/ubuntu/my-app
+mkdir /home/c2-user/nida
+cd /home/ec2-user/nida
 docker-compose down || true

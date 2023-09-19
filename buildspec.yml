@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875681151031.dkr.ecr.us-east-1.amazonaws.com
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo
 
 
 
@@ -14,13 +14,13 @@ phases:
       - docker login -u nidairshad -p dckr_pat_3VN9xYfXWU3j-rLpP7MNHa0vY18
 
       - docker build -t my-repo .
-      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
+      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-repo:latest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo:latest
+      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-repo:latest
 
 
 artifacts:
