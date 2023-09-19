@@ -3,5 +3,5 @@ set -e
 
 # Stop any running containers
 
-cd /home/ec2-user/
+cd /home/ubuntu/
 docker-compose down || true

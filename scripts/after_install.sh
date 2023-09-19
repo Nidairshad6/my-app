@@ -2,6 +2,6 @@
 set -e
 
 # Pull the latest Docker images and start the containers
-cd /home/ec2-user/nida
+cd /home/ubuntu/
 docker-compose pull
 docker-compose up -d
