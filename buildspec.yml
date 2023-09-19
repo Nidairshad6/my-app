@@ -13,14 +13,14 @@ phases:
       - echo Building Docker image...
       - docker login -u nidairshad -p dckr_pat_3VN9xYfXWU3j-rLpP7MNHa0vY18
 
-      - docker build -t my-repo .
-      - docker tag my-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-repo:latest
+      - docker build -t first-repo .
+      - docker tag first-repo:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/first-repo:latest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-repo:latest
+      - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/first-repo:latest
 
 
 artifacts:
