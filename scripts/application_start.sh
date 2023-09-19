@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 
-# Start the Docker Compose project
-sudo docker-compose up -d
+docker run -d first-repo
+
